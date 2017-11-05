@@ -33,6 +33,7 @@
 #include "AP_Baro_SITL.h"
 #include "AP_Baro_BMP085.h"
 #include "AP_Baro_BMP280.h"
+#include "AP_Baro_hachidori.h"
 #include "AP_Baro_HIL.h"
 #include "AP_Baro_KellerLD.h"
 #include "AP_Baro_MS5611.h"
@@ -587,6 +588,9 @@ void AP_Baro::init(void)
 #elif HAL_BARO_DEFAULT == HAL_BARO_LPS22H_SPI
     ADD_BACKEND(AP_Baro_LPS2XH::probe(*this,
                                       std::move(hal.spi->get_device(HAL_BARO_LPS22H_NAME))));
+#elif HAL_BARO_DEFAULT == HAL_BARO_HACHIDORI
+    drivers[0] = new AP_Baro_HACHIDORI(*this);
+    _num_drivers = 1;
 #endif
 
     // can optionally have baro on I2C too

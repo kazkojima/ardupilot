@@ -38,6 +38,7 @@
 #define HAL_BOARD_SUBTYPE_LINUX_EDGE       1020
 #define HAL_BOARD_SUBTYPE_LINUX_RST_ZYNQ   1021
 #define HAL_BOARD_SUBTYPE_LINUX_POCKET     1022
+#define HAL_BOARD_SUBTYPE_LINUX_HACHIDORI  1023
 
 /* HAL PX4 sub-types, starting at 2000 */
 #define HAL_BOARD_SUBTYPE_PX4_V1           2000
@@ -101,6 +102,7 @@
 #define HAL_INS_RST         21
 #define HAL_INS_LSM9DS1     22
 #define HAL_INS_ICM20789_SPI 23
+#define HAL_INS_HACHIDORI   24
 
 /* Barometer driver types */
 #define HAL_BARO_NONE        0
@@ -121,6 +123,7 @@
 #define HAL_BARO_LPS25H_IMU_I2C 17
 #define HAL_BARO_FBM320_I2C 18
 #define HAL_BARO_DPS280_I2C 19
+#define HAL_BARO_HACHIDORI  20
 
 /* Compass driver types */
 #define HAL_COMPASS_NONE                0
@@ -144,6 +147,7 @@
 #define HAL_COMPASS_BMM150_I2C         21
 #define HAL_COMPASS_QMC5883L           22
 #define HAL_COMPASS_IST8310            23
+#define HAL_COMPASS_HACHIDORI          24
 
 /* Heat Types */
 #define HAL_LINUX_HEAT_PWM 1

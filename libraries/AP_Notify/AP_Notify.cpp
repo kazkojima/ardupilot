@@ -75,6 +75,9 @@ AP_Notify *AP_Notify::_singleton;
   #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_RST_ZYNQ
     #define BUILD_DEFAULT_LED_TYPE (Notify_LED_ToshibaLED_I2C_External)
 
+  #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+    #define BUILD_DEFAULT_LED_TYPE (Notify_LED_None)
+
   #else // other linux
     #define BUILD_DEFAULT_LED_TYPE (Notify_LED_Board | I2C_LEDS)
   #endif
@@ -284,6 +287,9 @@ void AP_Notify::add_backends(void)
   #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_BBBMINI || \
         CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_POCKET
     ADD_BACKEND(new Buzzer());
+
+  #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+    ADD_BACKEND(new RCOutputRGBLed(13, 14, 15));
 
   #else // other linux
     ADD_BACKEND(new AP_ToneAlarm());

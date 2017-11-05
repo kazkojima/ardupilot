@@ -36,6 +36,7 @@
 #include "AP_RangeFinder_Wasp.h"
 #include "AP_RangeFinder_Benewake.h"
 #include "AP_RangeFinder_PWM.h"
+#include "AP_RangeFinder_hachidori.h"
 #include <AP_BoardConfig/AP_BoardConfig.h>
 #include <AP_Vehicle/AP_Vehicle_Type.h>
 
@@ -449,6 +450,13 @@ void RangeFinder::detect_instance(uint8_t instance, uint8_t& serial_instance)
     case RangeFinder_TYPE_BEBOP:
         if (AP_RangeFinder_Bebop::detect()) {
             drivers[instance] = new AP_RangeFinder_Bebop(state[instance]);
+        }
+        break;
+#endif
+#if CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+    case RangeFinder_TYPE_HACHIDORI:
+        if (AP_RangeFinder_HACHIDORI::detect()) {
+            drivers[instance] = new AP_RangeFinder_HACHIDORI(state[instance], params[instance]);
         }
         break;
 #endif

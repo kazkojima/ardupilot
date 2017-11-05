@@ -9,6 +9,7 @@
 #include "AP_Compass_AK8963.h"
 #include "AP_Compass_Backend.h"
 #include "AP_Compass_BMM150.h"
+#include "AP_Compass_hachidori.h"
 #include "AP_Compass_HIL.h"
 #include "AP_Compass_HMC5843.h"
 #include "AP_Compass_IST8308.h"
@@ -844,8 +845,11 @@ void Compass::_detect_backends(void)
     }
 
 #elif HAL_COMPASS_DEFAULT == HAL_COMPASS_BH
+<<<<<<< 314ce5695a2ce98532841dddada1c5a68a04189e
     ADD_BACKEND(DRIVER_HMC5883, AP_Compass_HMC5843::probe(GET_I2C_DEVICE(HAL_COMPASS_HMC5843_I2C_BUS, HAL_COMPASS_HMC5843_I2C_ADDR)));
     ADD_BACKEND(DRIVER_AK8963, AP_Compass_AK8963::probe_mpu9250(0));
+#elif HAL_COMPASS_DEFAULT == HAL_COMPASS_HACHIDORI
+    ADD_BACKEND(DRIVER_HACHIDORI, AP_Compass_HACHIDORI::detect());
 #elif HAL_COMPASS_DEFAULT == HAL_COMPASS_BBBMINI
     ADD_BACKEND(DRIVER_HMC5883, AP_Compass_HMC5843::probe(GET_I2C_DEVICE(HAL_COMPASS_HMC5843_I2C_BUS, HAL_COMPASS_HMC5843_I2C_ADDR), true));
     ADD_BACKEND(DRIVER_AK8963, AP_Compass_AK8963::probe_mpu9250(0));
