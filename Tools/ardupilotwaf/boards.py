@@ -1047,6 +1047,16 @@ class rst_zynq(linux):
             CONFIG_HAL_BOARD_SUBTYPE = 'HAL_BOARD_SUBTYPE_LINUX_RST_ZYNQ',
         )
 
+class hachidori(linux):
+    def configure_env(self, cfg, env):
+        super(hachidori, self).configure_env(cfg, env)
+
+        env.DEFINES.update(
+            CONFIG_HAL_BOARD_SUBTYPE = 'HAL_BOARD_SUBTYPE_LINUX_HACHIDORI',
+        )
+
+        env.CXXFLAGS += ['-DALLOW_ARM_NO_COMPASS']
+
 class SITL_static(sitl):
     def configure_env(self, cfg, env):
         super(SITL_static, self).configure_env(cfg, env)
