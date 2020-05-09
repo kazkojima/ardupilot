@@ -40,6 +40,7 @@
 #define HAL_BOARD_SUBTYPE_LINUX_POCKET     1022
 #define HAL_BOARD_SUBTYPE_LINUX_NAVIGATOR  1023
 #define HAL_BOARD_SUBTYPE_LINUX_VNAV       1024
+#define HAL_BOARD_SUBTYPE_LINUX_HACHIDORI  1025
 
 /* HAL CHIBIOS sub-types, starting at 5000
 
@@ -69,7 +70,7 @@
 #define HAL_INS_MPU6500     19
 #define HAL_INS_INV2_I2C    24
 #define HAL_INS_INV2_SPI    25
-
+#define HAL_INS_HACHIDORI   26
 
 /* Barometer driver types */
 #define HAL_BARO_NONE        0
@@ -77,10 +78,12 @@
 #define HAL_BARO_20789_I2C_I2C  14
 #define HAL_BARO_20789_I2C_SPI  15
 #define HAL_BARO_LPS25H_IMU_I2C 17
+#define HAL_BARO_HACHIDORI  22
 
 /* Compass driver types */
 #define HAL_COMPASS_NONE                0
 #define HAL_COMPASS_HIL_UNUSED          3  // unused
+#define HAL_COMPASS_HACHIDORI          24
 
 /* Heat Types */
 #define HAL_LINUX_HEAT_PWM 1

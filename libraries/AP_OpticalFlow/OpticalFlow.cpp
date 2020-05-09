@@ -9,6 +9,7 @@
 #include "AP_OpticalFlow_HereFlow.h"
 #include "AP_OpticalFlow_MSP.h"
 #include "AP_OpticalFlow_UPFLOW.h"
+#include "AP_OpticalFlow_hachidori.h"
 #include <AP_Logger/AP_Logger.h>
 
 extern const AP_HAL::HAL& hal;
@@ -18,6 +19,8 @@ extern const AP_HAL::HAL& hal;
   #define OPTICAL_FLOW_TYPE_DEFAULT OpticalFlowType::PIXART
  #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_BEBOP
   #define OPTICAL_FLOW_TYPE_DEFAULT OpticalFlowType::BEBOP
+ #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+  #define OPTICAL_FLOW_TYPE_DEFAULT OpticalFlowType::HACHIDORI
  #else
   #define OPTICAL_FLOW_TYPE_DEFAULT OpticalFlowType::NONE
  #endif
@@ -144,6 +147,9 @@ void OpticalFlow::init(uint32_t log_bit)
         break;
     case OpticalFlowType::UPFLOW:
         backend = AP_OpticalFlow_UPFLOW::detect(*this);
+        break;
+    case OpticalFlowType::HACHIDORI:
+        backend = new AP_OpticalFlow_HACHIDORI(*this);
         break;
     case OpticalFlowType::SITL:
 #if CONFIG_HAL_BOARD == HAL_BOARD_SITL

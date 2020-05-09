@@ -12,6 +12,7 @@
 #include "AP_Compass_AK8963.h"
 #include "AP_Compass_Backend.h"
 #include "AP_Compass_BMM150.h"
+#include "AP_Compass_hachidori.h"
 #include "AP_Compass_HMC5843.h"
 #include "AP_Compass_IST8308.h"
 #include "AP_Compass_IST8310.h"
@@ -1239,6 +1240,8 @@ void Compass::_detect_backends(void)
 #if defined(HAL_MAG_PROBE_LIST)
     // driver probes defined by COMPASS lines in hwdef.dat
     HAL_MAG_PROBE_LIST;
+#elif HAL_COMPASS_DEFAULT == HAL_COMPASS_HACHIDORI
+    ADD_BACKEND(DRIVER_HACHIDORI, AP_Compass_HACHIDORI::detect());
 #elif AP_FEATURE_BOARD_DETECT
     switch (AP_BoardConfig::get_board_type()) {
     case AP_BoardConfig::PX4_BOARD_PX4V1:

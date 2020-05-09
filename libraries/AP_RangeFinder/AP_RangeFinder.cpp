@@ -45,6 +45,7 @@
 #include "AP_RangeFinder_UAVCAN.h"
 #include "AP_RangeFinder_Lanbao.h"
 #include "AP_RangeFinder_LeddarVu8.h"
+#include "AP_RangeFinder_hachidori.h"
 #include "AP_RangeFinder_SITL.h"
 #include "AP_RangeFinder_MSP.h"
 #include "AP_RangeFinder_USD1_CAN.h"
@@ -463,6 +464,13 @@ void RangeFinder::detect_instance(uint8_t instance, uint8_t& serial_instance)
         }
 #endif
         break;
+#if CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+    case Type::HACHIDORI:
+        if (AP_RangeFinder_HACHIDORI::detect()) {
+            drivers[instance] = new AP_RangeFinder_HACHIDORI(state[instance], params[instance]);
+        }
+        break;
+#endif
     case Type::MAVLink:
 #ifndef HAL_BUILD_AP_PERIPH
         if (AP_RangeFinder_MAVLink::detect()) {
