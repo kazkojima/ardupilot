@@ -488,7 +488,10 @@ private:
 #if AP_COMPASS_QMC5883P_ENABLED
         DRIVER_QMC5883P =20,
 #endif
-};
+#if AP_COMPASS_HACHIDORI_ENABLED
+        DRIVER_HACHIDORI=21,
+#endif
+    };
 
     bool _driver_enabled(enum DriverType driver_type);
     
