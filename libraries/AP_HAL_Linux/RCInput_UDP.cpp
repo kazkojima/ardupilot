@@ -5,20 +5,20 @@
 #include <AP_HAL/AP_HAL.h>
 
 #include "RCInput_UDP.h"
+#include <errno.h>
 
 extern const AP_HAL::HAL& hal;
 
 using namespace Linux;
 
-RCInput_UDP::RCInput_UDP() :
-    _port(0),
+RCInput_UDP::RCInput_UDP(int port = RCINPUT_UDP_DEF_PORT) :
+    _port(port),
     _last_buf_ts(0),
     _last_buf_seq(0)
 {}
 
 void RCInput_UDP::init()
 {
-    _port = RCINPUT_UDP_DEF_PORT;
     if(!_socket.bind("0.0.0.0", _port)) {
         hal.console->printf("failed to bind UDP socket\n");
     }

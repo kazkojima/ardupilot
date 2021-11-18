@@ -337,6 +337,17 @@
     #define HAL_BUZZER_PIN                12 // You can choose between 27,22,4,12
     #define OBAL_ALLOW_ADC                1
 
+#elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+#define HAL_BOARD_LOG_DIRECTORY "/var/APM/logs"
+#define HAL_BOARD_TERRAIN_DIRECTORY "/var/APM/terrain"
+#define HAL_INS_DEFAULT HAL_INS_HACHIDORI
+#define HAL_INS_DEFAULT_ROTATION ROTATION_YAW_270
+#define HAL_BARO_DEFAULT HAL_BARO_HACHIDORI
+#define HAL_MAG_PROBE_LIST ADD_BACKEND(DRIVER_HACHIDORI, AP_Compass_HACHIDORI::detect())
+#define AP_NOTIFY_RCOUTPUTRGBLED_LED_ENABLED 1
+#define HAL_RCOUT_RGBLED_RED      13
+#define HAL_RCOUT_RGBLED_GREEN    14
+#define HAL_RCOUT_RGBLED_BLUE     15
 #else
     #error "no Linux board subtype set"
 #endif
