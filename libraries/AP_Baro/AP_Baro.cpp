@@ -37,6 +37,7 @@
 #include "AP_Baro_BMP388.h"
 #include "AP_Baro_BMP581.h"
 #include "AP_Baro_SPL06.h"
+#include "AP_Baro_hachidori.h"
 #include "AP_Baro_KellerLD.h"
 #include "AP_Baro_MS5611.h"
 #include "AP_Baro_ICM20789.h"
@@ -679,6 +680,9 @@ void AP_Baro::init(void)
     ADD_BACKEND(AP_Baro_ICM20789::probe(*this,
                                         std::move(GET_I2C_DEVICE(HAL_BARO_20789_I2C_BUS, HAL_BARO_20789_I2C_ADDR_PRESS)),
                                         std::move(hal.spi->get_device("icm20789"))));
+#elif HAL_BARO_DEFAULT == HAL_BARO_HACHIDORI
+    drivers[0] = new AP_Baro_HACHIDORI(*this);
+    _num_drivers = 1;
 #endif
 
     // can optionally have baro on I2C too

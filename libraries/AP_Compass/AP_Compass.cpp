@@ -22,6 +22,7 @@
 #include "AP_Compass_Backend.h"
 #include "AP_Compass_BMM150.h"
 #include "AP_Compass_BMM350.h"
+#include "AP_Compass_hachidori.h"
 #include "AP_Compass_HMC5843.h"
 #include "AP_Compass_IST8308.h"
 #include "AP_Compass_IST8310.h"

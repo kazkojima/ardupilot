@@ -499,7 +499,10 @@ private:
 #if AP_COMPASS_BMM350_ENABLED
         DRIVER_BMM350   =21,
 #endif
-};
+#if AP_COMPASS_HACHIDORI_ENABLED
+        DRIVER_HACHIDORI=22,
+#endif
+    };
 
     bool _driver_enabled(enum DriverType driver_type);
     

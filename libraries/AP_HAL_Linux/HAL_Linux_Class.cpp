@@ -16,6 +16,7 @@
 
 #include "AnalogIn_ADS1115.h"
 #include "AnalogIn_IIO.h"
+#include "AnalogIn_hachidori.h"
 #include "AnalogIn_Navio2.h"
 #include "GPIO.h"
 #include "I2CDevice.h"
@@ -34,6 +35,7 @@
 #include "RCOutput_AioPRU.h"
 #include "RCOutput_Bebop.h"
 #include "RCOutput_Disco.h"
+#include "RCOutput_hachidori.h"
 #include "RCOutput_PCA9685.h"
 #include "RCOutput_PRU.h"
 #include "RCOutput_Sysfs.h"
@@ -43,6 +45,7 @@
 #include "Scheduler.h"
 #include "Storage.h"
 #include "UARTDriver.h"
+#include "UARTDriver_hachidori.h"
 #include "Util.h"
 #include "Util_RPI.h"
 #include "CANSocketIface.h"
@@ -83,6 +86,8 @@ static SPIDeviceManager spi_mgr_instance;
     CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_NAVIO2 || \
     CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_BH
 static SPIUARTDriver serial3Driver;
+#elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+static UARTDriver_HACHIDORI serial3Driver;
 #else
 static UARTDriver serial3Driver(false);
 #endif
@@ -117,6 +122,8 @@ static AnalogIn_IIO analogIn;
 #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_NAVIO2 || \
       CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_EDGE
 static AnalogIn_Navio2 analogIn;
+#elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+static AnalogIn_HACHIDORI analogIn;
 #else
 static Empty::AnalogIn analogIn;
 #endif
@@ -188,6 +195,8 @@ static RCInput_SoloLink rcinDriver;
 static RCInput_Navio2 rcinDriver;
 #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_RST_ZYNQ
 static RCInput_RCProtocol rcinDriver{"/dev/ttyPS0", NULL};
+#elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+static RCInput_UDP rcinDriver(5990);
 #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_VNAV || \
       CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_NAVIGATOR
 // this is needed to allow for RC input using SERIALn_PROTOCOL=23. No fd is opened
@@ -239,6 +248,8 @@ static RCOutput_Sysfs rcoutDriver(0, 0, 8);
 static RCOutput_PCA9685 rcoutDriver(i2c_mgr_instance.get_device(1, PCA9685_PRIMARY_ADDRESS), 0, 0, RPI_GPIO_<17>());
 #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_CANZERO
 static RCOutput_Sysfs rcoutDriver(0, 0, 2);
+#elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+static RCOutput_HACHIDORI rcoutDriver;
 #else
 static Empty::RCOutput rcoutDriver;
 #endif

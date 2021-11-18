@@ -25,6 +25,7 @@
 #include "AP_InertialSensor_BMI160.h"
 #include "AP_InertialSensor_BMI270.h"
 #include "AP_InertialSensor_Backend.h"
+#include "AP_InertialSensor_hachidori.h"
 #include "AP_InertialSensor_L3G4200D.h"
 #include "AP_InertialSensor_LSM9DS0.h"
 #include "AP_InertialSensor_LSM9DS1.h"
@@ -1192,6 +1193,8 @@ AP_InertialSensor::detect_backends(void)
 #if defined(HAL_SITL_INVENSENSEV3)
     ADD_BACKEND(AP_InertialSensor_Invensensev3::probe(*this, hal.i2c_mgr->get_device(1, 1), ROTATION_NONE));
 #endif
+#elif HAL_INS_DEFAULT == HAL_INS_HACHIDORI
+    ADD_BACKEND(AP_InertialSensor_HACHIDORI::detect(*this));
 #elif AP_FEATURE_BOARD_DETECT
     switch (AP_BoardConfig::get_board_type()) {
     case AP_BoardConfig::PX4_BOARD_PX4V1:

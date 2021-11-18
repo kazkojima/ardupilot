@@ -11,7 +11,7 @@ namespace Linux {
 class RCInput_UDP : public RCInput
 {
 public:
-    RCInput_UDP();
+    RCInput_UDP(int);
     void init() override;
     void _timer_tick(void) override;
 private:

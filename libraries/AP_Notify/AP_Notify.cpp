@@ -110,6 +110,8 @@ AP_Notify *AP_Notify::_singleton;
 
   #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_RST_ZYNQ
     #define DEFAULT_NTF_LED_TYPES (Notify_LED_ToshibaLED_I2C_External)
+  #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_HACHIDORI
+    #define DEFAULT_NTF_LED_TYPES (Notify_LED_None)
   #endif  // board subtype
 #endif  // CONFIG_HAL_BOARD == HAL_BOARD_LINUX
 #endif  // defined (DEFAULT_NTF_LED_TYPES)

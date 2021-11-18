@@ -52,6 +52,7 @@
 #include "AP_RangeFinder_DroneCAN.h"
 #include "AP_RangeFinder_Lanbao.h"
 #include "AP_RangeFinder_LeddarVu8.h"
+#include "AP_RangeFinder_hachidori.h"
 #include "AP_RangeFinder_SITL.h"
 #include "AP_RangeFinder_MSP.h"
 #include "AP_RangeFinder_USD1_CAN.h"
@@ -418,6 +419,13 @@ void RangeFinder::detect_instance(uint8_t instance, uint8_t& serial_instance)
     case Type::BEBOP:
         if (AP_RangeFinder_Bebop::detect()) {
             _add_backend(NEW_NOTHROW AP_RangeFinder_Bebop(state[instance], params[instance]), instance);
+        }
+        break;
+#endif
+#if AP_RANGEFINDER_HACHIDORI_ENABLED
+    case Type::HACHIDORI:
+        if (AP_RangeFinder_HACHIDORI::detect()) {
+            _add_backend(new AP_RangeFinder_HACHIDORI(state[instance], params[instance]), instance);
         }
         break;
 #endif
